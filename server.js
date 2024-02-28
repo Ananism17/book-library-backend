@@ -35,6 +35,10 @@ app.use((req, res, next) => {
 });
 
 //routes
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
+
 app.use("/api/users", userRoutes);
 
 //error-middlewares
@@ -45,3 +49,5 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log("Listening on port", port);
 });
+
+export default app;
