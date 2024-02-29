@@ -29,9 +29,14 @@ const port = process.env.PORT || 5555;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://book-library-diljar.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
