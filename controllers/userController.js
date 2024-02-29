@@ -18,6 +18,7 @@ const authUser = asyncHandler(async (req, res) => {
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
     res.status(200).json({
+      status: true,
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -50,6 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
+      status: true,
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -69,7 +71,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     expires: new Date(0),
   });
 
-  res.status(200).json({ message: "Logged Out" });
+  res.status(200).json({ status: true, message: "Logged Out" });
 });
 
 // @desc Get user profile
@@ -82,7 +84,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     email: req.user.email,
   };
 
-  res.status(200).json(user);
+  res.status(200).json({ user: user, status: true });
 });
 
 // @desc Update user profile
@@ -97,6 +99,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save();
     res.status(200).json({
+      status: true,
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,

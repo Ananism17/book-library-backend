@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 //routes
 import userRoutes from "./routes/userRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
 
 //middlewares
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
@@ -26,6 +28,7 @@ const port = process.env.PORT || 5555;
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(cookieParser());
 
@@ -40,6 +43,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/books", bookRoutes);
 
 //error-middlewares
 app.use(notFound);
