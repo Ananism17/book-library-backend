@@ -105,6 +105,7 @@ const getBooks = asyncHandler(async (req, res) => {
       pageSize,
       totalPages: Math.ceil(totalBooks / pageSize),
       totalBooks,
+      status: true,
     });
   } else {
     res.status(404);
